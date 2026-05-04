@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import MenuGenerator from "./pages/MenuGenerator";
 import WeeklyPlan from "./pages/WeeklyPlan";
 import ProgressTracker from "./pages/ProgressTracker";
+import YearlyCalendar from "./pages/YearlyCalendar";
 
 
 function Router() {
@@ -17,6 +18,7 @@ function Router() {
       <Route path={"/menu-generator"} component={MenuGenerator} />
       <Route path={"/weekly-plan"} component={WeeklyPlan} />
       <Route path={"/progress-tracker"} component={ProgressTracker} />
+      <Route path={"/yearly-calendar"} component={YearlyCalendar} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
