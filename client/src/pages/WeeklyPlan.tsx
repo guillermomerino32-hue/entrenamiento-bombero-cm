@@ -10,7 +10,8 @@ import {
   generateWeeklySummary,
   classifyTrainingDays,
 } from '@/lib/trainingNutritionSync';
-import { Calendar, Zap, Droplet, AlertCircle, TrendingUp } from 'lucide-react';
+import { Calendar, Zap, Droplet, AlertCircle, TrendingUp, Download } from 'lucide-react';
+import { downloadWeeklyPlanPDF } from '@/lib/pdfExporter';
 
 export default function WeeklyPlan() {
   const [selectedPhase, setSelectedPhase] = useState(0);
@@ -287,8 +288,63 @@ export default function WeeklyPlan() {
           })}
         </div>
 
+        {/* Export Section */}
+        <Card className="border-primary/20 bg-primary/5 mt-12">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Download className="w-5 h-5 text-primary" />
+              Exportar Plan Semanal
+            </CardTitle>
+            <CardDescription>Descarga el plan completo en PDF para imprimir o compartir</CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="bg-background/50 rounded-lg p-4 border border-border/50">
+                <h4 className="font-bold text-sm mb-2">Plan Básico</h4>
+                <p className="text-xs text-muted-foreground mb-3">Entrenamientos + Nutrición + Pre/Post</p>
+                <Button
+                  onClick={() => downloadWeeklyPlanPDF({
+                    phase: selectedPhase + 1,
+                    week: selectedWeek,
+                    includeShoppingList: false,
+                    includeEquivalences: false,
+                  })}
+                  className="w-full"
+                  size="sm"
+                >
+                  <Download className="w-4 h-4 mr-2" />
+                  Descargar PDF
+                </Button>
+              </div>
+              
+              <div className="bg-background/50 rounded-lg p-4 border border-border/50">
+                <h4 className="font-bold text-sm mb-2">Plan Completo</h4>
+                <p className="text-xs text-muted-foreground mb-3">+ Listas de compra + Equivalencias</p>
+                <Button
+                  onClick={() => downloadWeeklyPlanPDF({
+                    phase: selectedPhase + 1,
+                    week: selectedWeek,
+                    includeShoppingList: true,
+                    includeEquivalences: true,
+                  })}
+                  className="w-full"
+                  size="sm"
+                  variant="default"
+                >
+                  <Download className="w-4 h-4 mr-2" />
+                  Descargar PDF Completo
+                </Button>
+              </div>
+            </div>
+            
+            <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-3 text-xs text-muted-foreground">
+              💡 El PDF está optimizado para imprimir. Usa "Imprimir a PDF" desde tu navegador para mayor control.
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Quick Links */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
           <a href="/" className="p-4 rounded-lg border border-border/50 bg-background/50 hover:bg-background/80 transition-colors">
             <div className="font-bold text-sm mb-1">📋 Ver Entrenamientos</div>
             <div className="text-xs text-muted-foreground">Detalle de ejercicios por día</div>
