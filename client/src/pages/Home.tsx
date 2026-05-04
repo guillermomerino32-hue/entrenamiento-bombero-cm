@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Flame, Calendar, Utensils, TrendingUp, AlertCircle, Share2, BookOpen, Zap } from 'lucide-react';
+import { Flame, Calendar, Utensils, TrendingUp, AlertCircle, Share2, BookOpen, Zap, Edit2, Check, X } from 'lucide-react';
 
 export default function Home() {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [currentWeek, setCurrentWeek] = useState(0);
+  const [isEditingDate, setIsEditingDate] = useState(false);
+  const [newDateInput, setNewDateInput] = useState('');
 
   // Cargar fecha de inicio
   useEffect(() => {
@@ -14,12 +16,33 @@ export default function Home() {
     if (stored) {
       const date = new Date(stored);
       setStartDate(date);
-      const today = new Date();
-      const diffTime = today.getTime() - date.getTime();
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-      setCurrentWeek(Math.ceil(diffDays / 7));
+      updateWeekCount(date);
+      setNewDateInput(date.toISOString().split('T')[0]);
     }
   }, []);
+
+  const updateWeekCount = (date: Date) => {
+    const today = new Date();
+    const diffTime = today.getTime() - date.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    setCurrentWeek(Math.ceil(diffDays / 7));
+  };
+
+  const handleSaveDate = () => {
+    if (!newDateInput) return;
+    const newDate = new Date(newDateInput);
+    localStorage.setItem('bombero_start_date', newDate.toISOString());
+    setStartDate(newDate);
+    updateWeekCount(newDate);
+    setIsEditingDate(false);
+  };
+
+  const handleCancelEdit = () => {
+    if (startDate) {
+      setNewDateInput(startDate.toISOString().split('T')[0]);
+    }
+    setIsEditingDate(false);
+  };
 
   const modules = [
     {
@@ -101,8 +124,49 @@ export default function Home() {
                 <div className="text-2xl font-bold text-primary mt-1">{currentWeek}</div>
               </div>
               <div className="bg-background/50 rounded-lg p-4 border border-border">
-                <div className="text-sm text-muted-foreground">Fecha de Inicio</div>
-                <div className="text-2xl font-bold text-primary mt-1">{startDate.toLocaleDateString('es-ES')}</div>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="text-sm text-muted-foreground">Fecha de Inicio</div>
+                    {!isEditingDate ? (
+                      <div className="text-2xl font-bold text-primary mt-1">{startDate.toLocaleDateString('es-ES')}</div>
+                    ) : (
+                      <input
+                        type="date"
+                        value={newDateInput}
+                        onChange={(e) => setNewDateInput(e.target.value)}
+                        className="mt-2 px-3 py-2 rounded-lg bg-background border border-primary text-foreground text-sm"
+                      />
+                    )}
+                  </div>
+                  <div className="flex gap-2">
+                    {!isEditingDate ? (
+                      <button
+                        onClick={() => setIsEditingDate(true)}
+                        className="p-2 hover:bg-primary/10 rounded-lg transition-colors"
+                        title="Editar fecha"
+                      >
+                        <Edit2 className="w-4 h-4 text-primary" />
+                      </button>
+                    ) : (
+                      <>
+                        <button
+                          onClick={handleSaveDate}
+                          className="p-2 hover:bg-green-500/10 rounded-lg transition-colors"
+                          title="Guardar"
+                        >
+                          <Check className="w-4 h-4 text-green-500" />
+                        </button>
+                        <button
+                          onClick={handleCancelEdit}
+                          className="p-2 hover:bg-red-500/10 rounded-lg transition-colors"
+                          title="Cancelar"
+                        >
+                          <X className="w-4 h-4 text-red-500" />
+                        </button>
+                      </>
+                    )}
+                  </div>
+                </div>
               </div>
               <div className="bg-background/50 rounded-lg p-4 border border-border">
                 <div className="text-sm text-muted-foreground">Días Restantes</div>
@@ -123,11 +187,34 @@ export default function Home() {
               Selecciona un módulo abajo para comenzar.
             </p>
             {!startDate && (
-              <div className="flex gap-3 items-center">
-                <AlertCircle className="w-5 h-5 text-yellow-500" />
-                <span className="text-sm text-muted-foreground">
-                  Para activar todas las funciones, establece tu fecha de inicio en <strong>Plan de 24 Meses</strong>
-                </span>
+              <div className="space-y-4">
+                <div className="flex gap-3 items-center">
+                  <AlertCircle className="w-5 h-5 text-yellow-500" />
+                  <span className="text-sm text-muted-foreground">
+                    Para activar todas las funciones, establece tu fecha de inicio
+                  </span>
+                </div>
+                <div className="flex gap-3 items-center">
+                  <input
+                    type="date"
+                    value={newDateInput}
+                    onChange={(e) => setNewDateInput(e.target.value)}
+                    className="px-3 py-2 rounded-lg bg-background border border-primary text-foreground text-sm"
+                  />
+                  <Button
+                    onClick={() => {
+                      if (newDateInput) {
+                        const newDate = new Date(newDateInput);
+                        localStorage.setItem('bombero_start_date', newDate.toISOString());
+                        setStartDate(newDate);
+                        updateWeekCount(newDate);
+                      }
+                    }}
+                    className="bg-primary text-primary-foreground hover:bg-primary/90"
+                  >
+                    Establecer Fecha
+                  </Button>
+                </div>
               </div>
             )}
           </div>
@@ -277,7 +364,7 @@ export default function Home() {
                 <div className="flex-shrink-0 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold text-sm">1</div>
                 <div>
                   <div className="font-bold text-foreground">Establece tu fecha de inicio</div>
-                  <div className="text-sm text-muted-foreground">Ve a "Plan de 24 Meses" e introduce tu fecha de inicio del entrenamiento</div>
+                  <div className="text-sm text-muted-foreground">Usa el campo de fecha en el encabezado o en la sección de bienvenida</div>
                 </div>
               </div>
 
