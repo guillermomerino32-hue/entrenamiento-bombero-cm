@@ -75,14 +75,14 @@ export default function MenuGenerator() {
               <h1 className="text-3xl font-bold text-foreground">Generador de Menús</h1>
             </div>
             <div className="flex gap-2">
-              <a href="/progress-tracker" className="px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-sm font-medium">
+              <a href="/" className="px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-sm font-medium">
+                🏠 Inicio
+              </a>
+              <a href="/progress-tracker" className="px-4 py-2 rounded-lg border border-primary text-primary hover:bg-primary/10 transition-colors text-sm font-medium">
                 📈 Progreso
               </a>
               <a href="/weekly-plan" className="px-4 py-2 rounded-lg border border-primary text-primary hover:bg-primary/10 transition-colors text-sm font-medium">
                 📅 Plan
-              </a>
-              <a href="/" className="px-4 py-2 rounded-lg border border-primary text-primary hover:bg-primary/10 transition-colors text-sm font-medium">
-                📊 Entrenamientos
               </a>
             </div>
           </div>

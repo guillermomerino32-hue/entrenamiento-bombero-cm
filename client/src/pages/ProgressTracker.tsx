@@ -102,6 +102,9 @@ export default function ProgressTracker() {
               <h1 className="text-3xl font-bold text-foreground">Seguimiento de Progreso</h1>
             </div>
             <div className="flex gap-2">
+              <a href="/" className="px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-sm font-medium">
+                🏠 Inicio
+              </a>
               <Button
                 onClick={() => downloadProgressCSV()}
                 variant="outline"

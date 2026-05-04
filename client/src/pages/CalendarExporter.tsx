@@ -90,9 +90,14 @@ export default function CalendarExporter() {
               <Calendar className="w-8 h-8 text-primary" />
               <h1 className="text-3xl font-bold text-foreground">Exportar a Calendario</h1>
             </div>
-            <a href="/yearly-calendar" className="px-4 py-2 rounded-lg border border-primary text-primary hover:bg-primary/10 transition-colors text-sm font-medium">
-              📄 Plan de 24 Meses
-            </a>
+            <div className="flex gap-2">
+              <a href="/" className="px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-sm font-medium">
+                🏠 Inicio
+              </a>
+              <a href="/yearly-calendar" className="px-4 py-2 rounded-lg border border-primary text-primary hover:bg-primary/10 transition-colors text-sm font-medium">
+                📄 Plan de 24 Meses
+              </a>
+            </div>
           </div>
           <p className="text-muted-foreground">Sincroniza entrenamientos, hitos y simulacros con tu móvil</p>
         </div>
