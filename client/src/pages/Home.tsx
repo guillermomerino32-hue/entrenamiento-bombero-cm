@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { trainingPhases, dietPhases, progressionMilestones } from '@/data/trainingPlan';
-import { Flame, Calendar, Utensils, TrendingUp, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { Flame, Calendar, Utensils, TrendingUp, AlertCircle, CheckCircle2, Link as LinkIcon } from 'lucide-react';
 
 export default function Home() {
   const [selectedPhase, setSelectedPhase] = useState(0);
@@ -54,9 +54,14 @@ export default function Home() {
       {/* Header */}
       <header className="border-b border-border bg-card sticky top-0 z-50">
         <div className="container py-6">
-          <div className="flex items-center gap-3 mb-2">
-            <Flame className="w-8 h-8 text-primary" />
-            <h1 className="text-3xl font-bold text-foreground">Plan Bombero CM</h1>
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-3">
+              <Flame className="w-8 h-8 text-primary" />
+              <h1 className="text-3xl font-bold text-foreground">Plan Bombero CM</h1>
+            </div>
+            <a href="/menu-generator" className="px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-sm font-medium">
+              🍽️ Generador de Menús
+            </a>
           </div>
           <p className="text-muted-foreground">Entrenamiento interactivo para oposición — 24 meses de periodización avanzada</p>
         </div>
