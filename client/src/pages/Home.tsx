@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { trainingPhases, dietPhases, progressionMilestones } from '@/data/trainingPlan';
-import { Flame, Calendar, Utensils, TrendingUp, AlertCircle, CheckCircle2, Clock } from 'lucide-react';
+import { Flame, Calendar, Utensils, TrendingUp, AlertCircle, CheckCircle2, Clock, Share2 } from 'lucide-react';
 
 export default function Home() {
   const [selectedPhase, setSelectedPhase] = useState(0);
@@ -60,7 +60,10 @@ export default function Home() {
               <h1 className="text-3xl font-bold text-foreground">Plan Bombero CM</h1>
             </div>
             <div className="flex gap-2 flex-wrap">
-              <a href="/yearly-calendar" className="px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-sm font-medium">
+              <a href="/calendar-exporter" className="px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-sm font-medium">
+                📄 Calendario
+              </a>
+              <a href="/yearly-calendar" className="px-4 py-2 rounded-lg border border-primary text-primary hover:bg-primary/10 transition-colors text-sm font-medium">
                 📄 24 Meses
               </a>
               <a href="/progress-tracker" className="px-4 py-2 rounded-lg border border-primary text-primary hover:bg-primary/10 transition-colors text-sm font-medium">

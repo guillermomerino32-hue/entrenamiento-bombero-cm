@@ -9,6 +9,7 @@ import MenuGenerator from "./pages/MenuGenerator";
 import WeeklyPlan from "./pages/WeeklyPlan";
 import ProgressTracker from "./pages/ProgressTracker";
 import YearlyCalendar from "./pages/YearlyCalendar";
+import CalendarExporter from "./pages/CalendarExporter";
 
 
 function Router() {
@@ -19,6 +20,7 @@ function Router() {
       <Route path={"/weekly-plan"} component={WeeklyPlan} />
       <Route path={"/progress-tracker"} component={ProgressTracker} />
       <Route path={"/yearly-calendar"} component={YearlyCalendar} />
+      <Route path={"/calendar-exporter"} component={CalendarExporter} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
