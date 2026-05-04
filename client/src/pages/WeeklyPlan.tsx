@@ -71,9 +71,22 @@ export default function WeeklyPlan() {
       {/* Header */}
       <header className="border-b border-border bg-card sticky top-0 z-50">
         <div className="container py-6">
-          <div className="flex items-center gap-3 mb-2">
-            <Calendar className="w-8 h-8 text-primary" />
-            <h1 className="text-3xl font-bold text-foreground">Plan Semanal Sincronizado</h1>
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-3">
+              <Calendar className="w-8 h-8 text-primary" />
+              <h1 className="text-3xl font-bold text-foreground">Plan Semanal Sincronizado</h1>
+            </div>
+            <div className="flex gap-2">
+              <a href="/progress-tracker" className="px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-sm font-medium">
+                📈 Progreso
+              </a>
+              <a href="/menu-generator" className="px-4 py-2 rounded-lg border border-primary text-primary hover:bg-primary/10 transition-colors text-sm font-medium">
+                🍽️ Menús
+              </a>
+              <a href="/" className="px-4 py-2 rounded-lg border border-primary text-primary hover:bg-primary/10 transition-colors text-sm font-medium">
+                📊 Entrenamientos
+              </a>
+            </div>
           </div>
           <p className="text-muted-foreground">Entrenamientos + Nutrición optimizada para cada día</p>
         </div>
