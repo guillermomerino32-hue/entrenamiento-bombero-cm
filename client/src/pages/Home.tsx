@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { trainingPhases, dietPhases, progressionMilestones } from '@/data/trainingPlan';
-import { Flame, Calendar, Utensils, TrendingUp, AlertCircle, CheckCircle2, Link as LinkIcon } from 'lucide-react';
+import { Flame, Calendar, Utensils, TrendingUp, AlertCircle, CheckCircle2 } from 'lucide-react';
 
 export default function Home() {
   const [selectedPhase, setSelectedPhase] = useState(0);
@@ -59,9 +59,14 @@ export default function Home() {
               <Flame className="w-8 h-8 text-primary" />
               <h1 className="text-3xl font-bold text-foreground">Plan Bombero CM</h1>
             </div>
-            <a href="/menu-generator" className="px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-sm font-medium">
-              🍽️ Generador de Menús
-            </a>
+            <div className="flex gap-2">
+              <a href="/weekly-plan" className="px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-sm font-medium">
+                📅 Plan Semanal
+              </a>
+              <a href="/menu-generator" className="px-4 py-2 rounded-lg border border-primary text-primary hover:bg-primary/10 transition-colors text-sm font-medium">
+                🍽️ Menús
+              </a>
+            </div>
           </div>
           <p className="text-muted-foreground">Entrenamiento interactivo para oposición — 24 meses de periodización avanzada</p>
         </div>

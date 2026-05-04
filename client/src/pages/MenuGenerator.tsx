@@ -13,7 +13,7 @@ import {
   exportMenuAsText,
   suggestFoodSwaps,
 } from '@/lib/menuGenerator';
-import { ChefHat, RefreshCw, Download, ShoppingCart, Zap } from 'lucide-react';
+import { ChefHat, RefreshCw, Download, ShoppingCart } from 'lucide-react';
 
 export default function MenuGenerator() {
   const [selectedPhase, setSelectedPhase] = useState(0);
@@ -69,9 +69,19 @@ export default function MenuGenerator() {
       {/* Header */}
       <header className="border-b border-border bg-card sticky top-0 z-50">
         <div className="container py-6">
-          <div className="flex items-center gap-3 mb-2">
-            <ChefHat className="w-8 h-8 text-primary" />
-            <h1 className="text-3xl font-bold text-foreground">Generador de Menús</h1>
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-3">
+              <ChefHat className="w-8 h-8 text-primary" />
+              <h1 className="text-3xl font-bold text-foreground">Generador de Menús</h1>
+            </div>
+            <div className="flex gap-2">
+              <a href="/weekly-plan" className="px-4 py-2 rounded-lg bg-primary text-primary-foreground hover:bg-primary/90 transition-colors text-sm font-medium">
+                📅 Plan Semanal
+              </a>
+              <a href="/" className="px-4 py-2 rounded-lg border border-primary text-primary hover:bg-primary/10 transition-colors text-sm font-medium">
+                📊 Entrenamientos
+              </a>
+            </div>
           </div>
           <p className="text-muted-foreground">Crea menús diarios automáticos con macronutrientes precisos</p>
         </div>
