@@ -10,7 +10,7 @@ import {
   generateWeeklySummary,
   classifyTrainingDays,
 } from '@/lib/trainingNutritionSync';
-import { Calendar, Zap, Droplet, AlertCircle, TrendingUp, Download } from 'lucide-react';
+import { Calendar, Zap, Droplet, AlertCircle, TrendingUp, Download, Compass } from 'lucide-react';
 import { downloadWeeklyPlanPDF } from '@/lib/pdfExporter';
 
 export default function WeeklyPlan() {
@@ -86,6 +86,9 @@ export default function WeeklyPlan() {
               <a href="/menu-generator" className="px-4 py-2 rounded-lg border border-primary text-primary hover:bg-primary/10 transition-colors text-sm font-medium">
                 🍽️ Menús
               </a>
+              <a href="/recipe-library" className="px-4 py-2 rounded-lg border border-primary text-primary hover:bg-primary/10 transition-colors text-sm font-medium">
+                👨‍🍳 Recetas
+              </a>
             </div>
           </div>
           <p className="text-muted-foreground">Entrenamientos + Nutrición optimizada para cada día</p>
@@ -93,47 +96,69 @@ export default function WeeklyPlan() {
       </header>
 
       <main className="container py-8">
-        {/* Phase & Week Selector */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Selecciona tu Fase</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              {trainingPhases.map((p, idx) => (
-                <Button
-                  key={p.id}
-                  variant={selectedPhase === idx ? 'default' : 'outline'}
-                  onClick={() => setSelectedPhase(idx)}
-                  className="w-full justify-start text-left h-auto flex-col items-start p-3"
-                >
-                  <div className="font-bold text-sm">{p.name}</div>
-                  <div className="text-xs opacity-70">{p.weeks}</div>
-                </Button>
-              ))}
-            </CardContent>
-          </Card>
+        {/* Phase & Week Selector - Improved Navigator */}
+        <Card className="border-primary/20 bg-primary/5 mb-8">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-lg">
+              <span>🧭 Navegador de Fases y Semanas</span>
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            {/* Phase Selector */}
+            <div>
+              <h3 className="font-bold text-sm mb-3 text-muted-foreground">FASE DE ENTRENAMIENTO</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                {trainingPhases.map((p, idx) => (
+                  <div
+                    key={p.id}
+                    onClick={() => setSelectedPhase(idx)}
+                    className={`p-4 rounded-lg border-2 cursor-pointer transition-all ${
+                      selectedPhase === idx
+                        ? 'border-primary bg-primary/10'
+                        : 'border-border/50 bg-background/50 hover:border-primary/50'
+                    }`}
+                  >
+                    <div className="font-bold text-sm">{p.name}</div>
+                    <div className="text-xs text-muted-foreground mt-1">{p.weeks}</div>
+                    <div className="text-xs text-muted-foreground mt-2 line-clamp-2">{p.objective}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
 
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">Semana</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <div className="grid grid-cols-4 gap-2">
+            {/* Week Selector */}
+            <div>
+              <h3 className="font-bold text-sm mb-3 text-muted-foreground">SEMANA DE LA FASE</h3>
+              <div className="grid grid-cols-4 md:grid-cols-8 gap-2">
                 {[1, 2, 3, 4, 5, 6, 7, 8].map(week => (
                   <Button
                     key={week}
                     variant={selectedWeek === week ? 'default' : 'outline'}
                     onClick={() => setSelectedWeek(week)}
                     size="sm"
+                    className="h-10"
                   >
                     S{week}
                   </Button>
                 ))}
               </div>
-            </CardContent>
-          </Card>
-        </div>
+            </div>
+
+            {/* Phase Info Summary */}
+            <div className="bg-background/50 rounded-lg p-4 border border-border/50">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <div className="text-xs text-muted-foreground mb-1">FASE ACTUAL</div>
+                  <div className="font-bold text-sm">{phase.name}</div>
+                </div>
+                <div>
+                  <div className="text-xs text-muted-foreground mb-1">CRITERIOS DE AVANCE</div>
+                  <div className="text-xs text-muted-foreground">{phase.advanceCriteria}</div>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
         {/* Weekly Summary */}
         <Card className="border-primary/20 bg-primary/5 mb-8">

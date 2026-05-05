@@ -97,6 +97,9 @@ export default function CalendarExporter() {
               <a href="/yearly-calendar" className="px-4 py-2 rounded-lg border border-primary text-primary hover:bg-primary/10 transition-colors text-sm font-medium">
                 📄 Plan de 24 Meses
               </a>
+              <a href="/notion-sync" className="px-4 py-2 rounded-lg border border-primary text-primary hover:bg-primary/10 transition-colors text-sm font-medium">
+                🔄 Notion Calendar
+              </a>
             </div>
           </div>
           <p className="text-muted-foreground">Sincroniza entrenamientos, hitos y simulacros con tu móvil</p>

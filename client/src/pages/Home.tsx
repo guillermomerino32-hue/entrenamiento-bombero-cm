@@ -99,6 +99,24 @@ export default function Home() {
       icon: '🏋️',
       badge: 'Referencia',
     },
+    {
+      id: 'recipe-library',
+      title: '👨‍🍳 Biblioteca de Recetas',
+      description: 'Recetas detalladas organizadas por tipo de comida con información nutricional completa.',
+      href: '/recipe-library',
+      color: 'from-green-500 to-teal-500',
+      icon: '🍳',
+      badge: 'Nutrición',
+    },
+    {
+      id: 'notion-sync',
+      title: '🔄 Sincronización Notion',
+      description: 'Sincroniza entrenamientos, nutrición y hitos con Notion Calendar automáticamente.',
+      href: '/notion-sync',
+      color: 'from-indigo-500 to-blue-500',
+      icon: '📋',
+      badge: 'Integración',
+    },
   ];
 
   return (

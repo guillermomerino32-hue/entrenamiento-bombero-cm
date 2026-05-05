@@ -11,6 +11,8 @@ import ProgressTracker from "./pages/ProgressTracker";
 import YearlyCalendar from "./pages/YearlyCalendar";
 import CalendarExporter from "./pages/CalendarExporter";
 import TrainingDetails from "./pages/TrainingDetails";
+import RecipeLibrary from "./pages/RecipeLibrary";
+import NotionSync from "./pages/NotionSync";
 
 
 function Router() {
@@ -23,6 +25,8 @@ function Router() {
       <Route path={"/yearly-calendar"} component={YearlyCalendar} />
       <Route path={"/calendar-exporter"} component={CalendarExporter} />
       <Route path={"/training-details"} component={TrainingDetails} />
+      <Route path={"/recipe-library"} component={RecipeLibrary} />
+      <Route path={"/notion-sync"} component={NotionSync} />
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
