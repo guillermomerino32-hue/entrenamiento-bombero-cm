@@ -3,6 +3,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
 import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
+import GlobalPhaseBar from "./components/GlobalPhaseBar";
+import { PhaseProvider } from "./contexts/PhaseContext";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import MenuGenerator from "./pages/MenuGenerator";
@@ -17,20 +19,23 @@ import NotionSync from "./pages/NotionSync";
 
 function Router() {
   return (
-    <Switch>
-      <Route path={"\\"} component={Home} />
-      <Route path={"/menu-generator"} component={MenuGenerator} />
-      <Route path={"/weekly-plan"} component={WeeklyPlan} />
-      <Route path={"/progress-tracker"} component={ProgressTracker} />
-      <Route path={"/yearly-calendar"} component={YearlyCalendar} />
-      <Route path={"/calendar-exporter"} component={CalendarExporter} />
-      <Route path={"/training-details"} component={TrainingDetails} />
-      <Route path={"/recipe-library"} component={RecipeLibrary} />
-      <Route path={"/notion-sync"} component={NotionSync} />
-      <Route path={"/404"} component={NotFound} />
-      {/* Final fallback route */}
-      <Route component={NotFound} />
-    </Switch>
+    <>
+      <GlobalPhaseBar />
+      <Switch>
+        <Route path={"\\"} component={Home} />
+        <Route path={"/menu-generator"} component={MenuGenerator} />
+        <Route path={"/weekly-plan"} component={WeeklyPlan} />
+        <Route path={"/progress-tracker"} component={ProgressTracker} />
+        <Route path={"/yearly-calendar"} component={YearlyCalendar} />
+        <Route path={"/calendar-exporter"} component={CalendarExporter} />
+        <Route path={"/training-details"} component={TrainingDetails} />
+        <Route path={"/recipe-library"} component={RecipeLibrary} />
+        <Route path={"/notion-sync"} component={NotionSync} />
+        <Route path={"/404"} component={NotFound} />
+        {/* Final fallback route */}
+        <Route component={NotFound} />
+      </Switch>
+    </>
   );
 }
 
@@ -46,10 +51,12 @@ function App() {
         defaultTheme="dark"
         // switchable
       >
-        <TooltipProvider>
-          <Toaster />
-          <Router />
-        </TooltipProvider>
+        <PhaseProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Router />
+          </TooltipProvider>
+        </PhaseProvider>
       </ThemeProvider>
     </ErrorBoundary>
   );
