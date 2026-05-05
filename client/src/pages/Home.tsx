@@ -94,7 +94,7 @@ export default function Home() {
       id: 'training-details',
       title: '💪 Entrenamientos Detallados',
       description: 'Visualiza todos los ejercicios, series, repeticiones y progresiones por fase.',
-      href: '#training',
+      href: '/training-details',
       color: 'from-red-500 to-pink-500',
       icon: '🏋️',
       badge: 'Referencia',
